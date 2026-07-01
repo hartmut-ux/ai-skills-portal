@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic Infographic Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f5f7 0%, #e9e9ed 100%);
+            color: #1d1d1f;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* FIXED: Sidebar structure - DO NOT MODIFY */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow-y: auto;
+            max-height: calc(100vh - 40px);
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e5e7;
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #a1a1a6;
+            margin-bottom: 12px;
+        }
+
+        /* FIXED: Seed section - DO NOT MODIFY */
+        .seed-display {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+            font-family: 'Lora', serif;
+            text-align: center;
+        }
+
+        .seed-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .seed-btn {
+            padding: 8px 12px;
+            border: 1px solid #d5d5d7;
+            background: white;
+            color: #1d1d1f;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .seed-btn:hover {
+            background: #f5f5f7;
+            border-color: #a1a1a6;
+        }
+
+        .seed-btn:active {
+            background: #efefef;
+        }
+
+        .seed-jump {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .seed-jump input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #d5d5d7;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .seed-jump button {
+            padding: 8px 12px;
+            background: #1d1d1f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .seed-jump button:hover {
+            background: #424245;
+        }
+
+        /* VARIABLE: Parameter controls - CUSTOMIZE FOR EACH ARTWORK */
+        .control-group {
+            margin-bottom: 12px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: #1d1d1f;
+            margin-bottom: 6px;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: #d5d5d7;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #1d1d1f;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #1d1d1f;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s ease;
+        }
+
+        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+            background: #424245;
+        }
+
+        .control-group input[type="range"]::-moz-range-thumb:hover {
+            background: #424245;
+        }
+
+        .value-display {
+            display: inline-block;
+            font-size: 11px;
+            color: #a1a1a6;
+            margin-left: 8px;
+        }
+
+        /* VARIABLE: Color controls - OPTIONAL */
+        .color-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .color-group label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #1d1d1f;
+            flex: 1;
+        }
+
+        .color-group input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: 1px solid #d5d5d7;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* FIXED: Action buttons - DO NOT MODIFY */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 10px 12px;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            border: 1px solid #d5d5d7;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #e8e8ed;
+            border-color: #a1a1a6;
+        }
+
+        .action-btn:active {
+            background: #d5d5d7;
+        }
+
+        /* Main canvas area */
+        .canvas-wrapper {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: none;
+            }
+
+            .canvas-wrapper {
+                min-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- FIXED: Sidebar structure - DO NOT MODIFY -->
+        <div class="sidebar">
+            <!-- FIXED: Seed section -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Seed</h3>
+                <div class="seed-display" id="seedDisplay">12345</div>
+                <div class="seed-controls">
+                    <button class="seed-btn" onclick="previousSeed()">← Prev</button>
+                    <button class="seed-btn" onclick="nextSeed()">Next →</button>
+                </div>
+                <div class="seed-controls">
+                    <button class="seed-btn" onclick="randomSeed()" style="grid-column: 1 / -1;">Random</button>
+                </div>
+                <div class="seed-jump">
+                    <input type="number" id="seedInput" placeholder="Jump to..." value="12345">
+                    <button onclick="jumpToSeed()">Go</button>
+                </div>
+            </div>
+
+            <!-- VARIABLE: Parameters section - CUSTOMIZE FOR EACH ARTWORK -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Parameters</h3>
+                <div class="control-group">
+                    <label>Density</label>
+                    <input type="range" id="density" min="10" max="200" step="5" value="100" oninput="updateParam('density', this.value)">
+                    <span class="value-display" id="density-value">100</span>
+                </div>
+                <div class="control-group">
+                    <label>Scale</label>
+                    <input type="range" id="scale" min="0.1" max="3" step="0.1" value="1" oninput="updateParam('scale', this.value)">
+                    <span class="value-display" id="scale-value">1</span>
+                </div>
+            </div>
+
+            <!-- VARIABLE: Colors section - OPTIONAL, CUSTOMIZE OR REMOVE -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Colors</h3>
+                <div class="color-group">
+                    <label>Primary</label>
+                    <input type="color" id="color1" value="#1d1d1f" oninput="updateParam('color1', this.value)">
+                </div>
+                <div class="color-group">
+                    <label>Accent</label>
+                    <input type="color" id="color2" value="#0071e3" oninput="updateParam('color2', this.value)">
+                </div>
+            </div>
+
+            <!-- FIXED: Action buttons -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="regenerate()">Regenerate</button>
+                    <button class="action-btn" onclick="resetParams()">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas area -->
+        <div class="canvas-wrapper">
+            <div id="canvas-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABLE: Customize parameters for your algorithm
+        let currentSeed = 12345;
+        let params = {
+            seed: 12345,
+            density: 100,
+            scale: 1,
+            color1: '#1d1d1f',
+            color2: '#0071e3'
+        };
+
+        const defaultParams = {
+            seed: 12345,
+            density: 100,
+            scale: 1,
+            color1: '#1d1d1f',
+            color2: '#0071e3'
+        };
+
+        // VARIABLE: Your p5.js algorithm goes here
+        let sketchInstance;
+
+        function sketch(p) {
+            p.setup = function() {
+                const container = document.getElementById('canvas-container');
+                const size = Math.min(container.clientWidth - 20, 800);
+                p.createCanvas(size, size);
+            };
+
+            p.draw = function() {
+                p.background(255);
+
+                // Apply seed for reproducibility
+                p.randomSeed(params.seed);
+                p.noiseSeed(params.seed);
+
+                // Example algorithm - REPLACE WITH YOUR ALGORITHM
+                p.fill(params.color1);
+                p.stroke(params.color2);
+                p.strokeWeight(2);
+
+                for (let i = 0; i < params.density; i++) {
+                    let x = p.random(p.width);
+                    let y = p.random(p.height);
+                    let size = p.random(5, 20) * params.scale;
+                    p.ellipse(x, y, size);
+                }
+
+                p.noLoop();
+            };
+
+            p.windowResized = function() {
+                if (document.getElementById('canvas-container')) {
+                    const container = document.getElementById('canvas-container');
+                    const size = Math.min(container.clientWidth - 20, 800);
+                    p.resizeCanvas(size, size);
+                    p.redraw();
+                }
+            };
+        }
+
+        // Initialize p5.js
+        sketchInstance = new p5(sketch, 'canvas-container');
+
+        // Control functions
+        function updateParam(paramName, value) {
+            params[paramName] = isNaN(value) ? value : parseFloat(value);
+            document.getElementById(paramName + '-value').textContent = value;
+            sketchInstance.redraw();
+        }
+
+        function previousSeed() {
+            currentSeed = Math.max(1, currentSeed - 1);
+            setSeed(currentSeed);
+        }
+
+        function nextSeed() {
+            currentSeed++;
+            setSeed(currentSeed);
+        }
+
+        function randomSeed() {
+            currentSeed = Math.floor(Math.random() * 1000000);
+            setSeed(currentSeed);
+        }
+
+        function jumpToSeed() {
+            const input = document.getElementById('seedInput');
+            const seed = parseInt(input.value);
+            if (!isNaN(seed) && seed > 0) {
+                currentSeed = seed;
+                setSeed(currentSeed);
+            }
+        }
+
+        function setSeed(seed) {
+            currentSeed = seed;
+            params.seed = seed;
+            document.getElementById('seedDisplay').textContent = seed;
+            document.getElementById('seedInput').value = seed;
+            sketchInstance.redraw();
+        }
+
+        function regenerate() {
+            randomSeed();
+        }
+
+        function resetParams() {
+            params = { ...defaultParams };
+            currentSeed = defaultParams.seed;
+            document.getElementById('seedDisplay').textContent = currentSeed;
+            document.getElementById('seedInput').value = currentSeed;
+            document.getElementById('density').value = params.density;
+            document.getElementById('density-value').textContent = params.density;
+            document.getElementById('scale').value = params.scale;
+            document.getElementById('scale-value').textContent = params.scale;
+            document.getElementById('color1').value = params.color1;
+            document.getElementById('color2').value = params.color2;
+            sketchInstance.redraw();
+        }
+
+        // Initial display update
+        document.getElementById('seedDisplay').textContent = currentSeed;
+    </script>
+</body>
+</html>

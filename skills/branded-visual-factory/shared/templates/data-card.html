@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Card — {{BRAND}}</title>
+
+  <!-- FONT: Replace with brand-specific font link -->
+
+  <style>
+    /* ============================================
+       BRANDED VISUAL FACTORY — DATA CARD TEMPLATE
+
+       One bold number, one powerful message.
+       Maximum impact, minimum elements.
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-primary: {{COLOR_PRIMARY}};
+      --color-secondary: {{COLOR_SECONDARY}};
+      --color-fill-light: {{COLOR_FILL_LIGHT}};
+      --color-fill-neutral: {{COLOR_FILL_NEUTRAL}};
+      --color-text: {{COLOR_TEXT}};
+      --color-bg: {{COLOR_BG}};
+      --font-main: {{FONT_FAMILY}};
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 20px;
+    }
+
+    .canvas {
+      width: 1080px;
+      height: 1350px;
+      background: var(--color-bg);
+      font-family: var(--font-main);
+      color: var(--color-text);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      /* For FlowMomentum gradient bg, add: */
+      /* background: linear-gradient(135deg, ...); */
+    }
+
+    /* === EYEBROW === */
+    .eyebrow {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      margin-bottom: 32px;
+    }
+
+    /* === MAIN STAT === */
+    .stat {
+      font-size: 160px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-primary);
+      margin-bottom: 24px;
+    }
+
+    /* For smaller numbers (e.g., "10x"), use font-size: 200px */
+    /* For percentages, include the % in the stat */
+
+    /* === CONTEXT LINE === */
+    .context {
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.4;
+      max-width: 700px;
+      padding: 0 64px;
+      color: var(--color-text);
+    }
+
+    .context strong {
+      font-weight: 700;
+    }
+
+    /* === SECONDARY STAT ROW (optional) === */
+    .secondary-stats {
+      display: flex;
+      gap: 64px;
+      margin-top: 64px;
+      padding: 32px 64px;
+      border-top: 1px solid var(--color-fill-neutral);
+    }
+
+    .secondary-stat {
+      text-align: center;
+    }
+
+    .secondary-stat__number {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--color-secondary);
+    }
+
+    .secondary-stat__label {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 4px;
+      opacity: 0.7;
+    }
+
+    /* === SOURCE BADGE === */
+    .source-badge {
+      position: absolute;
+      bottom: 80px;
+      background: var(--color-fill-light);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-text);
+      /* For MMIND.ai: add border: 1px solid var(--color-text); */
+    }
+
+    /* === FOOTER === */
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer__source {
+      font-size: 12px;
+      font-weight: 300;
+      opacity: 0.5;
+    }
+
+    .footer__logo {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* === DECORATIVE ELEMENTS (optional) === */
+    /* For FlowMomentum: add organic shapes */
+    .deco-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+
+    .deco-circle--1 {
+      width: 400px;
+      height: 400px;
+      background: var(--color-primary);
+      top: -100px;
+      right: -100px;
+    }
+
+    .deco-circle--2 {
+      width: 250px;
+      height: 250px;
+      background: var(--color-secondary);
+      bottom: 100px;
+      left: -80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+
+    <!-- OPTIONAL: Decorative circles (uncomment for softer look) -->
+    <!-- <div class="deco-circle deco-circle--1"></div> -->
+    <!-- <div class="deco-circle deco-circle--2"></div> -->
+
+    <!-- EYEBROW -->
+    <div class="eyebrow">{{EYEBROW_TEXT}}</div>
+
+    <!-- MAIN STAT -->
+    <div class="stat">{{STAT_NUMBER}}</div>
+
+    <!-- CONTEXT -->
+    <p class="context">{{CONTEXT_TEXT}}</p>
+
+    <!-- OPTIONAL: Secondary Stats Row -->
+    <!--
+    <div class="secondary-stats">
+      <div class="secondary-stat">
+        <div class="secondary-stat__number">{{SECONDARY_1}}</div>
+        <div class="secondary-stat__label">{{SECONDARY_1_LABEL}}</div>
+      </div>
+      <div class="secondary-stat">
+        <div class="secondary-stat__number">{{SECONDARY_2}}</div>
+        <div class="secondary-stat__label">{{SECONDARY_2_LABEL}}</div>
+      </div>
+      <div class="secondary-stat">
+        <div class="secondary-stat__number">{{SECONDARY_3}}</div>
+        <div class="secondary-stat__label">{{SECONDARY_3_LABEL}}</div>
+      </div>
+    </div>
+    -->
+
+    <!-- SOURCE BADGE -->
+    <div class="source-badge">{{SOURCE}}</div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer__source">{{BRAND_DOMAIN}}</span>
+      <span class="footer__logo">{{BRAND_LOGO_TEXT}}</span>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+# CLAUDE.md (Token-Efficient Mode v2)
+
+> Drop-in für jedes Projekt-Root. Erzwingt Terseness ohne Code-Änderung.
+> Inspiriert von Claude Token Efficient (drona23) + Session-State-Best-Practices + eigene Anpassungen.
+> Ziel: < 5k Tokens. Wenn grösser → Sections in docs/ auslagern.
+
+## Projekt
+
+[Name] | [Typ: Web-App/API/CLI/etc.] | [Status: Aktiv/Refactor/Stable]
+
+## Tech Stack
+
+[Framework, Sprache, DB, Auth, Hosting — als Bullets, je eine Zeile]
+
+## Conventions
+
+- Naming: [z.B. camelCase für Vars, PascalCase für Klassen]
+- Imports: [z.B. absolute Pfade mit @/]
+- Tests: [z.B. Jest, co-located mit Source]
+- Commits: [z.B. conventional commits]
+
+## Don'ts
+
+- [Was nie tun — Guardrails, architekturelle Verbote]
+- [Max 5 Einträge, die wichtigsten]
+
+## Bekannte Issues
+
+- [Aktiver Bug / Edge-Case]
+- [Offene Architektur-Entscheidung]
+
+## Voice & Format (Claude-Verhalten)
+
+- Terse Mode permanent aktiv.
+- Antworten in Bullets, sobald >3 Punkte.
+- Keine Höflichkeitsfloskeln ("Gerne", "Natürlich", "Klar").
+- Keine Wiederholung der User-Frage.
+- Keine Vorankündigung von Tool-Calls.
+- Kein Pre-/Postamble um Deliverables.
+- Code ohne erklärende Wrapper-Sätze.
+
+## Code-Reading Strategy
+
+- Glob → Grep → gezielter Read mit offset/limit.
+- Files > 300 Zeilen NIE komplett lesen.
+- Bei unbekanntem Repo: zuerst `find` + `wc -l` Mapping.
+
+## Bash-Output
+
+- Build-Logs: `| tail -50`
+- Tests: `| grep -E "(PASS|FAIL|ERROR)" | head -30`
+- JSON: durch `jq` filtern, nicht roh dumpen.
+- Heavy Commands: `> /tmp/out.log`, dann head/tail/grep.
+
+## Edits
+
+- Keine Re-Reads nach Edit.
+- Batch-Edits in einer Antwort, nicht einzeln.
+- `Edit` mit präzisem `old_string` statt `Write` für ganze Files.
+
+## Session Management
+
+- Alle ~40 Antworten: /compact vorschlagen.
+- Session-Ende: Summary → docs/progress.md + session_summary.md
+- Session-Start: @CLAUDE.md @docs/progress.md laden.
+
+## TodoList
+
+- Max 7 aktive Items.
+- Completed regelmässig aufräumen.
+
+## Antwort-Länge
+
+- Default: < 200 Tokens.
+- Bei komplexer Frage: < 500 Tokens.
+- Bei expliziter Aufforderung "ausführlich": ohne Limit.
+
+## Verbote
+
+- Kein "Ich werde jetzt..."
+- Kein "Hier ist..."
+- Kein "Lass mich wissen..."
+- Kein "Hoffe das hilft..."
+- Keine ASCII-Banner.
+- Keine doppelten Leerzeilen.
+
+## Notfall-Befehle (vom User)
+
+| Phrase | Wirkung |
+|---|---|
+| "caveman" | Maximale Komprimierung, Stichworte ok |
+| "ausführlich" | Skill OFF für diese Antwort |
+| "neue Session" | Session-State in Datei + Reset-Hinweis |
+| "spar Tokens" | Alle 7 Hebel aktiv |
+| "/compact" | Context komprimieren + session_summary.md speichern |
+| "was kostet das" | ccusage-Empfehlung geben |

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infographic — {{BRAND}}</title>
+
+  <!-- FONT: Replace with brand-specific font link -->
+  <!-- MMIND.ai: -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"> -->
+  <!-- FlowMomentum.ai: -->
+  <!-- <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet"> -->
+
+  <style>
+    /* ============================================
+       BRANDED VISUAL FACTORY — INFOGRAPHIC TEMPLATE
+
+       INSTRUCTIONS:
+       1. Replace all {{VARIABLE}} placeholders
+       2. Load the correct font for the brand
+       3. Use ONLY brand palette colors
+       4. Keep dimensions exact: 1080 x 1350
+       ============================================ */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* === REPLACE WITH BRAND COLORS === */
+      --color-primary: {{COLOR_PRIMARY}};
+      --color-secondary: {{COLOR_SECONDARY}};
+      --color-fill-light: {{COLOR_FILL_LIGHT}};
+      --color-fill-neutral: {{COLOR_FILL_NEUTRAL}};
+      --color-text: {{COLOR_TEXT}};
+      --color-bg: {{COLOR_BG}};
+
+      /* === REPLACE WITH BRAND FONT === */
+      --font-main: {{FONT_FAMILY}};
+
+      /* === SPACING (universal) === */
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 64px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 20px;
+    }
+
+    .canvas {
+      width: 1080px;
+      height: 1350px;
+      background: var(--color-bg);
+      font-family: var(--font-main);
+      color: var(--color-text);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* === HEADER SECTION === */
+    .header {
+      padding: var(--space-xl) var(--space-lg) var(--space-lg);
+      /* For FlowMomentum: add gradient background here */
+      /* background: linear-gradient(135deg, ...); */
+    }
+
+    .header__eyebrow {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .header__title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+
+    .header__subtitle {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--color-text);
+      opacity: 0.7;
+    }
+
+    /* === BODY SECTION (Steps/Process) === */
+    .body {
+      flex: 1;
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .step__number {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .step__content {
+      flex: 1;
+    }
+
+    .step__title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--color-text);
+    }
+
+    .step__description {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--color-text);
+      opacity: 0.8;
+    }
+
+    /* === HIGHLIGHT BOX === */
+    .highlight-box {
+      background: var(--color-fill-light);
+      border: 1px solid var(--color-text);
+      border-radius: 16px;
+      padding: var(--space-md);
+      margin: var(--space-sm) var(--space-lg);
+    }
+
+    .highlight-box__stat {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .highlight-box__label {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-top: 4px;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--color-fill-neutral);
+    }
+
+    .footer__source {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--color-text);
+      opacity: 0.6;
+    }
+
+    .footer__logo {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    /* === CONNECTOR LINE (between steps) === */
+    .connector {
+      width: 2px;
+      height: 16px;
+      background: var(--color-fill-neutral);
+      margin-left: 23px; /* center under 48px circle */
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header__eyebrow">{{EYEBROW_TEXT}}</div>
+      <h1 class="header__title">{{HEADLINE}}</h1>
+      <p class="header__subtitle">{{SUBTITLE}}</p>
+    </div>
+
+    <!-- BODY: Steps/Process -->
+    <div class="body">
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__content">
+          <div class="step__title">{{STEP_1_TITLE}}</div>
+          <div class="step__description">{{STEP_1_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__content">
+          <div class="step__title">{{STEP_2_TITLE}}</div>
+          <div class="step__description">{{STEP_2_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__content">
+          <div class="step__title">{{STEP_3_TITLE}}</div>
+          <div class="step__description">{{STEP_3_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="step__number">4</div>
+        <div class="step__content">
+          <div class="step__title">{{STEP_4_TITLE}}</div>
+          <div class="step__description">{{STEP_4_DESC}}</div>
+        </div>
+      </div>
+
+      <div class="connector"></div>
+
+      <!-- Step 5 -->
+      <div class="step">
+        <div class="step__number">5</div>
+        <div class="step__content">
+          <div class="step__title">{{STEP_5_TITLE}}</div>
+          <div class="step__description">{{STEP_5_DESC}}</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OPTIONAL: Highlight Box -->
+    <!--
+    <div class="highlight-box">
+      <div class="highlight-box__stat">{{STAT}}</div>
+      <div class="highlight-box__label">{{STAT_LABEL}}</div>
+    </div>
+    -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="footer__source">{{SOURCE}} · {{BRAND_DOMAIN}}</span>
+      <span class="footer__logo">{{BRAND_LOGO_TEXT}}</span>
+    </div>
+
+  </div>
+</body>
+</html>

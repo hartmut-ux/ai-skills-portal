@@ -1,0 +1,128 @@
+{
+  "name": "Grok Research Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "grok-research",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "notes": "POST to /webhook/grok-research with JSON body: { topic, modules, depth, language, brand }"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse incoming request and build Grok API prompts\nconst input = $input.first().json.body;\n\nconst topic = input.topic || 'AI trends';\nconst modules = (input.modules || 'trends,stats,experts,social').split(',');\nconst depth = input.depth || 'standard';\nconst language = input.language || 'EN';\nconst brand = input.brand || 'neutral';\n\nconst models = {\n  quick: 'grok-3-fast',\n  standard: 'grok-4.20-reasoning',\n  deep: 'grok-4.20-reasoning'\n};\n\nconst langInstructions = {\n  DE: 'Respond entirely in German. Search in both German and English but present all findings in German.',\n  EN: 'Respond entirely in English.',\n  BOTH: 'Search in both German and English. Present findings in the primary language.'\n};\n\nconst brandContexts = {\n  mmind: 'Context: Research for MMIND.ai — AI integration consultancy targeting SMEs in DACH.',\n  flowstate: 'Context: Research for FlowState Cyclist — executives using cycling and AI for leadership.',\n  abcc: 'Context: Research for Association of British Cycling Coaches.',\n  kaizen: 'Context: Research for Kaizen Institute — continuous improvement.',\n  neutral: ''\n};\n\nconst modulePrompts = {\n  trends: 'Search for the latest developments, news, and emerging trends about ' + topic + ' from the past 30 days. For each finding, provide: key insight, source name, source URL, publication date.',\n  stats: 'Find current statistics, survey data, market figures about ' + topic + '. Prioritize institutional data. For each: exact figure, what it measures, source with URL, date.',\n  experts: 'Find notable expert opinions and thought leader statements about ' + topic + '. For each: name and title, key statement, source/platform, URL.',\n  social: 'Search X/Twitter for engaging posts about ' + topic + ' (past 14 days). Also find top LinkedIn posts. For each: author, key message, engagement, URL.',\n  science: 'Search for peer-reviewed research papers about ' + topic + '. For each: title, authors, journal, year, key finding, DOI/URL.',\n  competitors: 'Analyze competitive landscape around ' + topic + '. For each insight: company, action, source URL, date.'\n};\n\n// Create one item per module for parallel execution\nconst items = modules.map(mod => ({\n  json: {\n    module: mod,\n    topic: topic,\n    model: models[depth],\n    prompt: (brandContexts[brand] || '') + '\\n\\n' + (langInstructions[language] || langInstructions.EN) + '\\n\\n' + (modulePrompts[mod] || ''),\n    depth: depth,\n    language: language,\n    brand: brand\n  }\n}));\n\nreturn items;"
+      },
+      "id": "prepare-prompts",
+      "name": "Prepare Module Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.x.ai/v1/responses",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $json.model, input: [{ role: 'user', content: $json.prompt }], tools: [{ type: 'web_search' }] }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "grok-api-call",
+      "name": "Grok API Call",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [690, 300],
+      "notes": "Set HTTP Header Auth credential with: Name='Authorization', Value='Bearer YOUR_XAI_API_KEY'"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract text and citations from Grok response\nconst items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const response = item.json;\n  const module = item.json.module || 'unknown';\n  let textParts = [];\n  let citations = [];\n\n  const output = response.output || response.content || [];\n  for (const block of output) {\n    if (block.type === 'message') {\n      for (const cb of (block.content || [])) {\n        if (cb.type === 'output_text') {\n          textParts.push(cb.text || '');\n          for (const ann of (cb.annotations || [])) {\n            if (ann.type === 'url_citation') {\n              citations.push({ title: ann.title || '', url: ann.url || '' });\n            }\n          }\n        }\n      }\n    } else if (block.type === 'text') {\n      textParts.push(block.text || '');\n    }\n  }\n\n  results.push({\n    json: {\n      module: module,\n      text: textParts.join('\\n'),\n      citations: citations,\n      citationCount: citations.length\n    }\n  });\n}\n\nreturn results;"
+      },
+      "id": "parse-response",
+      "name": "Parse Grok Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Assemble all module results into a Research Brief\nconst items = $input.all();\nconst today = new Date().toISOString().split('T')[0];\n\nlet brief = `# Research Brief\\n**Date:** ${today}\\n\\n`;\nlet totalCitations = 0;\n\nfor (const item of items) {\n  const { module, text, citations, citationCount } = item.json;\n  const label = {\n    trends: 'Trends & News',\n    stats: 'Statistics & Data',\n    experts: 'Expert Voices',\n    social: 'Social Pulse',\n    science: 'Scientific Sources',\n    competitors: 'Competitor/Market Intelligence'\n  }[module] || module;\n\n  brief += `## ${label}\\n\\n${text}\\n\\n`;\n  \n  if (citations && citations.length > 0) {\n    brief += `### Sources (${citations.length})\\n`;\n    citations.forEach((c, i) => {\n      brief += `${i+1}. [${c.title}](${c.url})\\n`;\n    });\n    brief += '\\n';\n    totalCitations += citations.length;\n  }\n}\n\nbrief += `---\\n**Total sources:** ${totalCitations}\\n`;\n\nreturn [{ json: { brief: brief, totalCitations: totalCitations } }];"
+      },
+      "id": "assemble-brief",
+      "name": "Assemble Research Brief",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, brief: $json.brief, totalCitations: $json.totalCitations }) }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1350, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [{ "node": "Prepare Module Prompts", "type": "main", "index": 0 }]
+      ]
+    },
+    "Prepare Module Prompts": {
+      "main": [
+        [{ "node": "Grok API Call", "type": "main", "index": 0 }]
+      ]
+    },
+    "Grok API Call": {
+      "main": [
+        [{ "node": "Parse Grok Response", "type": "main", "index": 0 }]
+      ]
+    },
+    "Parse Grok Response": {
+      "main": [
+        [{ "node": "Assemble Research Brief", "type": "main", "index": 0 }]
+      ]
+    },
+    "Assemble Research Brief": {
+      "main": [
+        [{ "node": "Respond", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [
+    { "name": "grok" },
+    { "name": "research" },
+    { "name": "content" }
+  ]
+}
