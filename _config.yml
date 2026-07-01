@@ -3,3 +3,5 @@ description: "Multi-platform AI skill library with thin wrappers for Kimi Code C
 url: "https://hartmut-ux.github.io/ai-skills-portal"
 baseurl: ""
 theme: minima
+header_pages:
+  - index.md
