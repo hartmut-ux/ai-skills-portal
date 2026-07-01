@@ -1,8 +1,10 @@
 # Multi-Platform AI Skills Portal
 
-A template repository for publishing AI skills that work across **Kimi Code CLI**, **Claude Code**, and **Codex CLI**.
+A template repository for publishing **AI skills** that work across **Kimi Code CLI**, **Claude Code**, and **Codex CLI**.
 
-Live page: `https://hartmut-ux.github.io/ai-skills-portal` (enable GitHub Pages first, see below).
+An AI skill is a reusable instruction pack that teaches your assistant how to do a specific job — write content, run research, create visuals, check arguments, or build apps — with consistent quality.
+
+**Live page:** https://hartmut-ux.github.io/ai-skills-portal
 
 ## How it works
 
@@ -24,7 +26,7 @@ git branch -M main
 git push -u origin main
 ```
 
-Then create a release tag to trigger the ZIP build:
+Create a release tag to trigger the ZIP build:
 
 ```bash
 git tag -a v0.1.0 -m "Initial release"
@@ -37,6 +39,8 @@ git push origin v0.1.0
 2. Under **Source**, select **Deploy from a branch**.
 3. Choose `main` and `/ (root)`.
 4. Save. The page will be available at `https://hartmut-ux.github.io/ai-skills-portal`.
+
+> Already done for this repo. The page is live.
 
 ## Where to store Claude skills for conversion
 

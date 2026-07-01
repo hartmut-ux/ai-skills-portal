@@ -1,80 +1,170 @@
 ---
-title: "AI Skills for Kimi, Claude & Codex"
-description: "Download AI skills that run on Kimi Code CLI, Claude Code and Codex CLI. One shared core, thin per-platform wrappers."
+title: "Download AI Skills for Kimi, Claude & Codex — No-Code AI Assistants"
+description: "Free, ready-to-use AI skills for Kimi Code CLI, Claude Code and Codex CLI. Download once, install in seconds, and turn your AI assistant into a content writer, researcher, editor, grant writer, app builder or visual designer."
 keywords:
+  - AI skills download
   - Kimi Code CLI skills
   - Claude Code skills
   - Codex CLI skills
-  - AI skill library
-  - multi-platform AI skills
+  - AI assistant templates
+  - no-code AI tools
+  - AI content creation
+  - AI research assistant
+  - AI writing assistant
+  - AI skills library
 ---
 
-# AI Skills for Kimi, Claude & Codex
+# Download Ready-to-Use AI Skills for Kimi, Claude & Codex
 
-A library of reusable AI skills that work across **Kimi Code CLI**, **Claude Code**, and **Codex CLI**. Each skill is maintained once and packaged automatically for every assistant.
+**Turn your AI assistant into a specialist — in under 60 seconds.**
 
-## Why multi-platform skills matter
+This library gives you **free, plug-and-play AI skills** that work across **Kimi Code CLI**, **Claude Code**, and **Codex CLI**. Each skill is like an app for your AI: install it once, then ask your assistant to write content, run research, build visuals, check arguments, or draft grant applications using a proven workflow.
 
-Most skills are tied to one assistant. This portal uses a **shared core + thin wrapper** pattern so you can:
+No coding required. Pick your assistant, download the matching ZIP, and start using the skill with a single command.
 
-- Write a skill once and ship it everywhere.
-- Let users pick their favorite AI assistant.
-- Keep maintenance low as assistants evolve.
+[Browse all skills](#available-skills) · [How to install](#how-to-install-a-skill-in-30-seconds) · [For skill authors](README.md)
 
-## How to install a skill
+---
 
-### Kimi Code CLI
+## What is an AI skill?
+
+An AI skill is a small instruction pack that teaches your AI assistant how to do a specific job well — for example:
+
+- Write a LinkedIn post or newsletter in your brand voice.
+- Research a topic with sources and citations.
+- Remove AI-sounding phrases from a text.
+- Create a branded infographic from a briefing.
+- Draft an impact report for a funding application.
+
+Instead of typing long prompts every time, you install the skill once and then simply say:
+
+> "Run content-engine" or "/humanizer"
+
+The skill loads the workflow, rules, and templates automatically.
+
+---
+
+## Why use these skills?
+
+| Without skills | With these skills |
+|---|---|
+| You rewrite the same prompt every day | One command starts a proven workflow |
+| Results vary depending on your prompt quality | Consistent output thanks to built-in rules |
+| Locked to one AI assistant | Same skill runs on Kimi, Claude **and** Codex |
+| Hard to share workflows with your team | Download a ZIP, copy a folder, done |
+
+---
+
+## How to install a skill in 30 seconds
+
+### 1. Download the ZIP
+
+Pick the skill below and download the version for your assistant:
+
+- **`-all.zip`** if you use more than one assistant
+- **`-kimi.zip`** for Kimi Code CLI
+- **`-claude.zip`** for Claude Code
+- **`-codex.zip`** for Codex CLI
+
+### 2. Unzip and copy one folder
+
+**Kimi Code CLI:**
 
 ```bash
-# Download the -kimi.zip or -all.zip, extract it, then:
 cp -R .kimi/skills/<skill-name> ~/.kimi/skills/
 ```
 
-Invoke in Kimi with `/<skill-name>`.
+Then type in Kimi: `/<skill-name>`
 
-### Claude Code
+**Claude Code:**
 
 ```bash
-# Download the -claude.zip or -all.zip, extract it, then:
 cp -R .claude/skills/<skill-name> ~/.claude/skills/
 ```
 
-Invoke in Claude with `<skill-name>`.
+Then type in Claude: `<skill-name>`
 
-### Codex CLI
+**Codex CLI:**
 
 ```bash
-# Download the -codex.zip or -all.zip, extract it, then:
 cp -R .codex/skills/<skill-name> ~/.codex/skills/
 ```
 
-Invoke in Codex with `<skill-name>`.
+Then type in Codex: `<skill-name>`
 
-## Available skills
-
-> Downloads work after you publish a release. Replace `v0.1.0` in the links below with your actual release tag, or use `latest` once a release exists.
-
-| Skill | Description | Download |
-|---|---|---|
-| [academic-research-suite](skills/academic-research-suite/) | Comprehensive academic research suite: deep research, paper writing, peer review, and publication pipeline. | [all](releases/download/v0.1.0/academic-research-suite-all.zip) · [kimi](releases/download/v0.1.0/academic-research-suite-kimi.zip) · [claude](releases/download/v0.1.0/academic-research-suite-claude.zip) · [codex](releases/download/v0.1.0/academic-research-suite-codex.zip) |
-| [branded-visual-factory](skills/branded-visual-factory/) | Generates on-brand HTML/CSS infographics, cheat sheets, data cards, and carousel slides as code. | [all](releases/download/v0.1.0/branded-visual-factory-all.zip) · [kimi](releases/download/v0.1.0/branded-visual-factory-kimi.zip) · [claude](releases/download/v0.1.0/branded-visual-factory-claude.zip) · [codex](releases/download/v0.1.0/branded-visual-factory-codex.zip) |
-| [content-engine](skills/content-engine/) | Universal content creation engine for newsletters, LinkedIn posts, blog articles, and multi-format repurposing. | [all](releases/download/v0.1.0/content-engine-all.zip) · [kimi](releases/download/v0.1.0/content-engine-kimi.zip) · [claude](releases/download/v0.1.0/content-engine-claude.zip) · [codex](releases/download/v0.1.0/content-engine-codex.zip) |
-| [contentpulse-lead-magnet](skills/contentpulse-lead-magnet/) | Creates professional lead magnets from ContentPulse exports: cheat sheets, whitepapers, and presentations. | [all](releases/download/v0.1.0/contentpulse-lead-magnet-all.zip) · [kimi](releases/download/v0.1.0/contentpulse-lead-magnet-kimi.zip) · [claude](releases/download/v0.1.0/contentpulse-lead-magnet-claude.zip) · [codex](releases/download/v0.1.0/contentpulse-lead-magnet-codex.zip) |
-| [critical-thinking-guardian](skills/critical-thinking-guardian/) | Background quality-control skill that applies critical thinking to every response. | [all](releases/download/v0.1.0/critical-thinking-guardian-all.zip) · [kimi](releases/download/v0.1.0/critical-thinking-guardian-kimi.zip) · [claude](releases/download/v0.1.0/critical-thinking-guardian-claude.zip) · [codex](releases/download/v0.1.0/critical-thinking-guardian-codex.zip) |
-| [digitalscheck-navigator](skills/digitalscheck-navigator/) | Guides SMEs through all three modules of the Digitalscheck Liechtenstein funding program. | [all](releases/download/v0.1.0/digitalscheck-navigator-all.zip) · [kimi](releases/download/v0.1.0/digitalscheck-navigator-kimi.zip) · [claude](releases/download/v0.1.0/digitalscheck-navigator-claude.zip) · [codex](releases/download/v0.1.0/digitalscheck-navigator-codex.zip) |
-| [first-principles-engine](skills/first-principles-engine/) | Strips any topic down to its fundamental truths using first-principles methodology. | [all](releases/download/v0.1.0/first-principles-engine-all.zip) · [kimi](releases/download/v0.1.0/first-principles-engine-kimi.zip) · [claude](releases/download/v0.1.0/first-principles-engine-claude.zip) · [codex](releases/download/v0.1.0/first-principles-engine-codex.zip) |
-| [fullstack-app-builder](skills/fullstack-app-builder/) | End-to-end workflow for building production web apps, from idea to deployed product. | [all](releases/download/v0.1.0/fullstack-app-builder-all.zip) · [kimi](releases/download/v0.1.0/fullstack-app-builder-kimi.zip) · [claude](releases/download/v0.1.0/fullstack-app-builder-claude.zip) · [codex](releases/download/v0.1.0/fullstack-app-builder-codex.zip) |
-| [grok-research-engine](skills/grok-research-engine/) | Deep research engine powered by the Grok API with web search, X/Twitter search, and multi-agent reasoning. | [all](releases/download/v0.1.0/grok-research-engine-all.zip) · [kimi](releases/download/v0.1.0/grok-research-engine-kimi.zip) · [claude](releases/download/v0.1.0/grok-research-engine-claude.zip) · [codex](releases/download/v0.1.0/grok-research-engine-codex.zip) |
-| [humanizer](skills/humanizer/) | Removes typical AI-language patterns from German and English texts so they sound natural and human. | [all](releases/download/v0.1.0/humanizer-all.zip) · [kimi](releases/download/v0.1.0/humanizer-kimi.zip) · [claude](releases/download/v0.1.0/humanizer-claude.zip) · [codex](releases/download/v0.1.0/humanizer-codex.zip) |
-| [impact-reporter](skills/impact-reporter/) | Creates impact reports, impact sections for funding proposals, and progress reports for any project. | [all](releases/download/v0.1.0/impact-reporter-all.zip) · [kimi](releases/download/v0.1.0/impact-reporter-kimi.zip) · [claude](releases/download/v0.1.0/impact-reporter-claude.zip) · [codex](releases/download/v0.1.0/impact-reporter-codex.zip) |
-| [programmatic-infographics](skills/programmatic-infographics/) | Creates programmatic infographics and generative visual art using p5.js with seeded randomness. | [all](releases/download/v0.1.0/programmatic-infographics-all.zip) · [kimi](releases/download/v0.1.0/programmatic-infographics-kimi.zip) · [claude](releases/download/v0.1.0/programmatic-infographics-claude.zip) · [codex](releases/download/v0.1.0/programmatic-infographics-codex.zip) |
-| [rag-text-optimizer](skills/rag-text-optimizer/) | Full RAG document optimization pipeline: re-extracts PDFs, fixes tables and layout, cleans OCR artifacts. | [all](releases/download/v0.1.0/rag-text-optimizer-all.zip) · [kimi](releases/download/v0.1.0/rag-text-optimizer-kimi.zip) · [claude](releases/download/v0.1.0/rag-text-optimizer-claude.zip) · [codex](releases/download/v0.1.0/rag-text-optimizer-codex.zip) |
-| [token-saver](skills/token-saver/) | Reduces token consumption in assistant sessions through compression, filtering, and session-state management. | [all](releases/download/v0.1.0/token-saver-all.zip) · [kimi](releases/download/v0.1.0/token-saver-kimi.zip) · [claude](releases/download/v0.1.0/token-saver-claude.zip) · [codex](releases/download/v0.1.0/token-saver-codex.zip) |
-
-## For skill authors
-
-Want to add your own skill? See the [README](README.md) and copy `skills/example-skill/` as a starting point.
+That's it. No account, no subscription, no API key required for the skill itself.
 
 ---
 
-*Open source under MIT.*
+## Available skills
+
+| Skill | What it does for you | Best for | Download |
+|---|---|---|---|
+| [content-engine](skills/content-engine/) | Writes newsletters, LinkedIn posts, blog articles, and repurposes content across formats. | Founders, marketers, ghostwriters | [all](releases/download/v0.1.0/content-engine-all.zip) · [kimi](releases/download/v0.1.0/content-engine-kimi.zip) · [claude](releases/download/v0.1.0/content-engine-claude.zip) · [codex](releases/download/v0.1.0/content-engine-codex.zip) |
+| [humanizer](skills/humanizer/) | Removes AI-sounding phrases from German and English text so it reads like a human wrote it. | Writers, editors, non-native speakers | [all](releases/download/v0.1.0/humanizer-all.zip) · [kimi](releases/download/v0.1.0/humanizer-kimi.zip) · [claude](releases/download/v0.1.0/humanizer-claude.zip) · [codex](releases/download/v0.1.0/humanizer-codex.zip) |
+| [grok-research-engine](skills/grok-research-engine/) | Runs deep research with current web and X/Twitter sources, then delivers a structured brief with citations. | Content creators, strategists, analysts | [all](releases/download/v0.1.0/grok-research-engine-all.zip) · [kimi](releases/download/v0.1.0/grok-research-engine-kimi.zip) · [claude](releases/download/v0.1.0/grok-research-engine-claude.zip) · [codex](releases/download/v0.1.0/grok-research-engine-codex.zip) |
+| [branded-visual-factory](skills/branded-visual-factory/) | Generates on-brand HTML/CSS infographics, cheat sheets, and data cards you can edit or export as images. | Designers, marketers, social media managers | [all](releases/download/v0.1.0/branded-visual-factory-all.zip) · [kimi](releases/download/v0.1.0/branded-visual-factory-kimi.zip) · [claude](releases/download/v0.1.0/branded-visual-factory-claude.zip) · [codex](releases/download/v0.1.0/branded-visual-factory-codex.zip) |
+| [fullstack-app-builder](skills/fullstack-app-builder/) | Guides you from idea to deployed web app: requirements, architecture, landing page, backend, and hosting. | Non-technical founders, product builders | [all](releases/download/v0.1.0/fullstack-app-builder-all.zip) · [kimi](releases/download/v0.1.0/fullstack-app-builder-kimi.zip) · [claude](releases/download/v0.1.0/fullstack-app-builder-claude.zip) · [codex](releases/download/v0.1.0/fullstack-app-builder-codex.zip) |
+| [academic-research-suite](skills/academic-research-suite/) | Helps with literature reviews, academic papers, peer-review simulations, and the full research-to-publication pipeline. | Researchers, PhD students, academics | [all](releases/download/v0.1.0/academic-research-suite-all.zip) · [kimi](releases/download/v0.1.0/academic-research-suite-kimi.zip) · [claude](releases/download/v0.1.0/academic-research-suite-claude.zip) · [codex](releases/download/v0.1.0/academic-research-suite-codex.zip) |
+| [impact-reporter](skills/impact-reporter/) | Drafts impact reports, funding proposal sections, and progress reports for EU, Swiss, or B Corp projects. | Grant writers, NGOs, project managers | [all](releases/download/v0.1.0/impact-reporter-all.zip) · [kimi](releases/download/v0.1.0/impact-reporter-kimi.zip) · [claude](releases/download/v0.1.0/impact-reporter-claude.zip) · [codex](releases/download/v0.1.0/impact-reporter-codex.zip) |
+| [critical-thinking-guardian](skills/critical-thinking-guardian/) | Runs a silent quality check on every answer: flags weak arguments, assumptions, and biases. | Consultants, writers, decision-makers | [all](releases/download/v0.1.0/critical-thinking-guardian-all.zip) · [kimi](releases/download/v0.1.0/critical-thinking-guardian-kimi.zip) · [claude](releases/download/v0.1.0/critical-thinking-guardian-claude.zip) · [codex](releases/download/v0.1.0/critical-thinking-guardian-codex.zip) |
+| [digitalscheck-navigator](skills/digitalscheck-navigator/) | Walks Liechtenstein SMEs through the Digitalscheck funding application from concept to final report. | SMEs in Liechtenstein, consultants | [all](releases/download/v0.1.0/digitalscheck-navigator-all.zip) · [kimi](releases/download/v0.1.0/digitalscheck-navigator-kimi.zip) · [claude](releases/download/v0.1.0/digitalscheck-navigator-claude.zip) · [codex](releases/download/v0.1.0/digitalscheck-navigator-codex.zip) |
+| [first-principles-engine](skills/first-principles-engine/) | Breaks any topic down to its fundamental truths so you can rethink problems from scratch. | Strategists, innovators, analysts | [all](releases/download/v0.1.0/first-principles-engine-all.zip) · [kimi](releases/download/v0.1.0/first-principles-engine-kimi.zip) · [claude](releases/download/v0.1.0/first-principles-engine-claude.zip) · [codex](releases/download/v0.1.0/first-principles-engine-codex.zip) |
+| [contentpulse-lead-magnet](skills/contentpulse-lead-magnet/) | Turns research exports into professional lead magnets: cheat sheets, whitepapers, and slide decks. | Content marketers, demand-gen teams | [all](releases/download/v0.1.0/contentpulse-lead-magnet-all.zip) · [kimi](releases/download/v0.1.0/contentpulse-lead-magnet-kimi.zip) · [claude](releases/download/v0.1.0/contentpulse-lead-magnet-claude.zip) · [codex](releases/download/v0.1.0/contentpulse-lead-magnet-codex.zip) |
+| [programmatic-infographics](skills/programmatic-infographics/) | Creates generative infographics and data art with code-based templates. | Designers, data journalists, creatives | [all](releases/download/v0.1.0/programmatic-infographics-all.zip) · [kimi](releases/download/v0.1.0/programmatic-infographics-kimi.zip) · [claude](releases/download/v0.1.0/programmatic-infographics-claude.zip) · [codex](releases/download/v0.1.0/programmatic-infographics-codex.zip) |
+| [rag-text-optimizer](skills/rag-text-optimizer/) | Cleans messy PDFs and documents so they work better in AI knowledge bases and chatbots. | Teams building AI knowledge bases | [all](releases/download/v0.1.0/rag-text-optimizer-all.zip) · [kimi](releases/download/v0.1.0/rag-text-optimizer-kimi.zip) · [claude](releases/download/v0.1.0/rag-text-optimizer-claude.zip) · [codex](releases/download/v0.1.0/rag-text-optimizer-codex.zip) |
+| [token-saver](skills/token-saver/) | Cuts AI session costs by compressing long outputs, filtering noise, and managing context efficiently. | Power users, developers, heavy AI users | [all](releases/download/v0.1.0/token-saver-all.zip) · [kimi](releases/download/v0.1.0/token-saver-kimi.zip) · [claude](releases/download/v0.1.0/token-saver-claude.zip) · [codex](releases/download/v0.1.0/token-saver-codex.zip) |
+
+---
+
+## Who these skills are for
+
+- **Founders and operators** who want consistent, on-brand content without hiring a large team.
+- **Marketers and ghostwriters** who need research, drafts, and visuals faster.
+- **Consultants and agencies** who want reusable workflows they can deploy for clients.
+- **Researchers and grant writers** who need structured, citation-ready output.
+- **Non-technical builders** who want to create apps, visuals, or reports with AI guidance.
+- **AI power users** who switch between Kimi, Claude, and Codex and want the same tools everywhere.
+
+---
+
+## Frequently asked questions
+
+### What is an AI skill?
+An AI skill is a reusable instruction pack that teaches your AI assistant how to perform a specific task — like writing a newsletter, researching a topic, or creating a visual — with consistent quality and fewer prompts.
+
+### Do these skills work with Kimi Code CLI?
+Yes. Every skill has a Kimi wrapper. Download the `-kimi.zip` or `-all.zip`, copy the `.kimi/skills/<name>/` folder to your Kimi skills directory, and invoke it with `/<name>`.
+
+### Do these skills work with Claude Code?
+Yes. Download the `-claude.zip` or `-all.zip`, copy the `.claude/skills/<name>/` folder to your Claude skills directory, and invoke it with `<name>`.
+
+### Do these skills work with Codex CLI?
+Yes. Download the `-codex.zip` or `-all.zip`, copy the `.codex/skills/<name>/` folder to your Codex skills directory, and invoke it with `<name>`.
+
+### Do I need to pay for these skills?
+No. All skills are released under the MIT License. You can use, modify, and share them freely.
+
+### Do I need an API key?
+Most skills run inside your existing AI assistant and use the tools you already have configured. Skills that call external APIs (like Grok research) will tell you which key is needed.
+
+### How do I add my own skill?
+Copy the `skills/example-skill/` folder, replace `shared/SKILL-CORE.md` with your workflow, and update the three wrapper files. See the [README](README.md) for details.
+
+### Can I use the same skill on multiple assistants?
+Yes. The `-all.zip` file contains wrappers for Kimi, Claude, and Codex, all sharing the same core workflow.
+
+---
+
+## Start using a skill today
+
+1. Pick a skill from the table above.
+2. Download the ZIP for your assistant.
+3. Copy the matching folder into your skills directory.
+4. Type the command and let the skill do the work.
+
+[Get the source code on GitHub](https://github.com/hartmut-ux/ai-skills-portal) · [Read the author guide](README.md)
+
+---
+
+*Open source under MIT. Built to make AI assistants useful out of the box.*
