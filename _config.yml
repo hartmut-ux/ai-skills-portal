@@ -5,3 +5,9 @@ baseurl: ""
 theme: minima
 header_pages:
   - index.md
+exclude:
+  - skills/
+  - scripts/
+  - .github/
+  - dist/
+  - README.md
