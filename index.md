@@ -52,9 +52,11 @@ Invoke in Codex with `<skill-name>`.
 
 ## Available skills
 
+> Downloads work after you publish a release. Replace `v0.1.0` in the links below with your actual release tag, or use `latest` once a release exists.
+
 | Skill | Description | Download |
 |---|---|---|
-| [example-skill](skills/example-skill/) | Template skill showing the multi-platform structure. | [all](releases/download/latest/example-skill-all.zip) · [kimi](releases/download/latest/example-skill-kimi.zip) · [claude](releases/download/latest/example-skill-claude.zip) · [codex](releases/download/latest/example-skill-codex.zip) |
+| [example-skill](skills/example-skill/) | Template skill showing the multi-platform structure. | [all](releases/download/v0.1.0/example-skill-all.zip) · [kimi](releases/download/v0.1.0/example-skill-kimi.zip) · [claude](releases/download/v0.1.0/example-skill-claude.zip) · [codex](releases/download/v0.1.0/example-skill-codex.zip) |
 
 ## For skill authors
 
